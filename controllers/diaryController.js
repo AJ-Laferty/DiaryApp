@@ -1,15 +1,19 @@
 import DiaryEntry from "../models/DiaryEntry.js";
-//import { fetchWeather } from "./weatherController.js";
+import { fetchCurrentWeather } from "./weatherController.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const createEntry = async (req, res) => {
   try {
-    const { title, content, reflection, tags, location, weather } = req.body;
+    const { title, content, reflection, tags, location } = req.body;
+    const weather = await fetchCurrentWeather(location, process.env.WEATHER_KEY);
     if (!title || !content || !location) {
         return res.status(400).json({ message: "Title, content, and location are required" });
     }
     console.log("Creating entry");
     const newEntry = DiaryEntry({
-      //user: req.user.id,
+      user: req.user.id,
       title,
       content,
       reflection,
@@ -41,7 +45,7 @@ export const getAllEntries = async (req, res) => {
     if (location) {
       filter.location = location;
     }
-    const entries = await DiaryEntry.find(filter).sort({ createdAt: -1 });
+    const entries = await DiaryEntry.find({ user: req.user._id });
     res.status(200).json(entries);
   } catch (error) {
     res.status(500).json({ message: "Server Error: Unable to fetch diary entries" });
@@ -51,6 +55,9 @@ export const getAllEntries = async (req, res) => {
 export const getEntryById = async (req, res) => {
   try {
     const entry = await DiaryEntry.findById(req.params.id);
+    if (entry.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Forbidden"});
+    }
     console.log(`Getting entry by ID: ${req.params.id}`);
     if (!entry) {
       return res.status(404).json({ message: "Entry not found" });
@@ -63,6 +70,10 @@ export const getEntryById = async (req, res) => {
 
 export const updateEntry = async (req, res) => {
   try {
+    const entry = await DiaryEntry.findById(req.params.id);
+    if (entry.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Forbidden"});
+    }
     console.log(`Updating entry by ID: ${req.params.id}`);
     const updatedEntry = await DiaryEntry.findByIdAndUpdate(
       req.params.id,
@@ -85,9 +96,12 @@ export const updateEntry = async (req, res) => {
 
 export const deleteEntry = async (req, res) => {
   try {
+    const entry = await DiaryEntry.findById(req.params.id);
+    if (entry.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "Forbidden"});
+    }
     console.log(`Deleting entry by ID: ${req.params.id}`);
     const deletedEntry = await DiaryEntry.findByIdAndDelete(req.params.id);
-
     if (!deletedEntry) {
       return res.status(404).json({ message: "Entry not found" });
     }

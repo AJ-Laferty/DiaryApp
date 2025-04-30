@@ -1,8 +1,10 @@
+@import "tailwindcss";
+
 /* Base container */
 .diary-entry {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Five-column grid */
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr; /* Five-row grid */
+  grid-template-rows: auto auto auto auto auto;
   gap: 16px;
   padding: 16px;
   border-radius: 12px;
@@ -11,7 +13,8 @@
   margin-bottom: 24px;
   cursor: pointer;
   transition: transform 0.2s ease;
-  font-family: 'Patrick Hand', cursive;
+  font-family: "Patrick Hand", cursive;
+  max-width: 100%;
 }
 
 .diary-entry:hover {
@@ -25,11 +28,18 @@
   justify-content: space-between;
   align-items: baseline;
   gap: 12px;
+  width: 100%;
+  grid-column: 1 / -1;
+  overflow: hidden;
 }
 
 .diary-title {
   margin: 0;
   font-size: 1.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  flex: 1; /* Allow title to take available space */
+  min-width: 0;
 }
 
 .diary-date {
@@ -44,6 +54,9 @@
   color: #444;
   margin-bottom: 12px;
   grid-column: 1 / 2; /* Content goes into the first column */
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%; /* Ensure content doesn't exceed container width */
 }
 
 .diary-reflection-blockquote {
@@ -53,6 +66,10 @@
   font-style: italic;
   color: #6a4f8f;
   grid-column: 1 / 2;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 /* Tags */
@@ -151,7 +168,7 @@
 }
 
 /* --------------------- */
-/* 🔁 Responsive Styles  */
+/* Responsive Styles  */
 /* --------------------- */
 
 /* Small tablets and phones */

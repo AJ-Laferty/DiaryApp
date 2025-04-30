@@ -37,7 +37,7 @@ const DiaryEntry = ({ entry, onUpdateEntry, onDeleteEntry }) => {
 
   return (
     <div
-      className="grid grid-cols-5 gap-4 p-4 rounded-xl bg-[#fffef9] shadow-md mb-6 cursor-pointer transition-transform duration-200 font-['Patrick_Hand'] max-w-full hover:scale-[1.01]"
+      className="grid grid-cols-5 gap-4 p-4 rounded-xl bg-[#fffef9] shadow-md mb-6 cursor-pointer transition-transform duration-200 font-['Patrick_Hand'] max-w-full"
       onClick={() => !isEditing && setIsExpanded(!isExpanded)}
     >
       {!isExpanded ? (
@@ -83,13 +83,13 @@ const DiaryEntry = ({ entry, onUpdateEntry, onDeleteEntry }) => {
               />
               <div className="flex flex-wrap gap-2.5 mt-4">
                 <button
-                  className="py-2 px-3.5 text-sm rounded-md border-none cursor-pointer transition-colors duration-200 bg-blue-500 text-white"
+                  className="py-2 px-3.5 text-sm rounded-md border-none cursor-pointer transition-colors duration-200 bg-blue-500 text-white hover:bg-blue-600"
                   onClick={handleSave}
                 >
                   Save
                 </button>
                 <button
-                  className="py-2 px-3.5 text-sm rounded-md border-none cursor-pointer transition-colors duration-200 bg-gray-500 text-white"
+                  className="py-2 px-3.5 text-sm rounded-md border-none cursor-pointer transition-colors duration-200 bg-gray-500 text-white hover:bg-gray-600"
                   onClick={() => setIsEditing(false)}
                 >
                   Cancel
@@ -140,13 +140,13 @@ const DiaryEntry = ({ entry, onUpdateEntry, onDeleteEntry }) => {
 
               <div className="flex flex-wrap gap-2.5 mt-4">
                 <button
-                  className="py-2 px-3.5 text-sm rounded-md border-none cursor-pointer transition-colors duration-200 bg-green-500 text-white"
+                  className="py-2 px-3.5 text-sm rounded-md border-none cursor-pointer transition-colors duration-200 bg-green-500 text-white hover:bg-green-600"
                   onClick={() => setIsEditing(true)}
                 >
                   Update
                 </button>
                 <button
-                  className="py-2 px-3.5 text-sm rounded-md border-none cursor-pointer transition-colors duration-200 bg-red-500 text-white"
+                  className="py-2 px-3.5 text-sm rounded-md border-none cursor-pointer transition-colors duration-200 bg-red-500 text-white hover:bg-red-600"
                   onClick={() => setShowConfirmDelete(true)}
                 >
                   Delete

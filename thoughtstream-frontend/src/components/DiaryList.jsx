@@ -7,8 +7,15 @@ const DiaryList = ({ entries, onUpdateEntry, onDeleteEntry }) => {
     <div className="diary-list-container">
       <div className="notebook-binding" />
       {entries.map((entry) => (
-        <div key={entry.id || `${entry.name}-${entry.date}`} className="diary-entry-wrapper">
-          <DiaryEntryCard entry={entry} onDeleteEntry={onDeleteEntry} onUpdateEntry={onUpdateEntry} />
+        <div
+          key={entry.id || `${entry.name}-${entry.date}`}
+          className="diary-entry-wrapper"
+        >
+          <DiaryEntryCard
+            entry={entry}
+            onDeleteEntry={onDeleteEntry}
+            onUpdateEntry={onUpdateEntry}
+          />
         </div>
       ))}
     </div>

@@ -40,7 +40,7 @@ const DashboardPage = () => {
   const handleAddEntry = async (newEntry) => {
     try {
       const payload = {
-        title: newEntry.name,
+        title: newEntry.title, // <-- use title, not name
         content: newEntry.content,
         reflection: "",
         tags: [],

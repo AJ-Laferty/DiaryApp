@@ -3,7 +3,7 @@ import "../styles/NewEntryForm.css";
 
 const NewEntryForm = ({ onSave }) => {
   const [newEntry, setNewEntry] = useState({
-    name: '',
+    title: '',
     date: '',
     content: '',
     weatherLocation: '',
@@ -20,7 +20,7 @@ const NewEntryForm = ({ onSave }) => {
     e.preventDefault();
     onSave(newEntry); // Pass the new entry to parent for saving
     setNewEntry({
-      name: '',
+      title: '',
       date: '',
       content: '',
       weatherLocation: '',
@@ -31,9 +31,9 @@ const NewEntryForm = ({ onSave }) => {
     <form onSubmit={handleSubmit} className="new-entry-form">
       <input
         type="text"
-        name="name"
+        name="title"
         placeholder="Title"
-        value={newEntry.name}
+        value={newEntry.title}
         onChange={handleInputChange}
         required
         className="form-input"

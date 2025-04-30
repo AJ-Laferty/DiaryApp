@@ -10,8 +10,8 @@ function Login() {
 
   const handleSuccess = async (credentialResponse) => {
     try {
-      const idToken = credentialResponse.credential;
-      const response = await api.post("/api/auth/google", { idToken });
+      const credential = credentialResponse.credential;
+      const response = await api.post("/api/auth/google", { credential });
 
       login(response.data.token, response.data.user);
       navigate("/dashboard");

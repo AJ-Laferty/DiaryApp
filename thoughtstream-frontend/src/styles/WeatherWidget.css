@@ -1,0 +1,160 @@
+/* Base styling */
+.weather-widget {
+  background-color: #faf3e0;
+  border-radius: 15px;
+  width: 280px;
+  padding: 10px; /* Reduced padding */
+  max-width: 100%;
+  text-align: center;
+  font-family: "Patrick Hand", cursive;
+  background-image: url("/images/texture.svg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Location at top */
+.weather-location {
+  font-size: 22px;
+  font-weight: 400;
+  color: #5a4d41;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Flex row: icon + info side-by-side */
+.weather-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Icon styles */
+.weather-icon {
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.2));
+  width: 80px; /* Increased size */
+  height: 80px; /* Increased size */
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  animation: slowFadeIn 1s ease-in-out;
+}
+
+/* Weather text layout */
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Temperature styling */
+.temperature {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #4c3d29;
+}
+
+/* Condition styling */
+.condition {
+  margin: 4px 0 0;
+  font-size: 16px;
+  color: #7e6f58;
+}
+
+/* Weather icon variants */
+.sunny {
+  background-image: url("/images/sunny.svg");
+  animation: rotateIcon 6s infinite linear;
+}
+
+.cloudy {
+  background-image: url("/images/cloudy.svg");
+}
+
+.rainy {
+  background-image: url("/images/rainy.svg");
+  animation: rainAnimation 3s infinite ease-in-out;
+}
+
+.snowy {
+  background-image: url("/images/snowy.svg");
+  animation: snowAnimation 5s infinite ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slowFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rotateIcon {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optional rain/snow animations */
+@keyframes rainAnimation {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+@keyframes snowAnimation {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .weather-widget {
+    width: 250px;
+    padding: 10px; /* Reduced padding */
+  }
+
+  .weather-location {
+    font-size: 18px;
+  }
+
+  .temperature {
+    font-size: 16px;
+  }
+
+  .condition {
+    font-size: 14px;
+  }
+
+  .weather-icon {
+    width: 70px; /* Adjusted icon size for small screens */
+    height: 70px; /* Adjusted icon size for small screens */
+  }
+}

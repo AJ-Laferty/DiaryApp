@@ -12,6 +12,7 @@ const diarySchema = new mongoose.Schema(
       condition: { type: String },
       temperature: { type: Number },
       location: { type: String },
+      iconCode: { type: String },
     },
   },
   { timestamps: true }

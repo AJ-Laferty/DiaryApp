@@ -1,0 +1,52 @@
+/* Header container */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #fff9c4; /* Light yellow background */
+    border-bottom: 1px solid #e6d96c; /* Light border */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo section */
+  .logo h1 {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 2rem;
+    color: #4b3b2f; /* Dark brown text */
+    margin: 0;
+  }
+  
+  /* User info section */
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Patrick Hand', cursive;
+  }
+  
+  /* User's profile image */
+  .user-image {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #d4a373; /* Gold border around the image */
+    object-fit: cover;
+  }
+  
+  /* Logout button */
+  .logout-button {
+    background-color: #f44336; /* Red background */
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-family: 'Patrick Hand', cursive;
+  }
+  
+  .logout-button:hover {
+    background-color: #e53935; /* Darker red when hovered */
+  }
+  

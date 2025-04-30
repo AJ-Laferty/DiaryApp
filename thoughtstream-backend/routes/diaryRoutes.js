@@ -6,14 +6,14 @@ import {
     updateEntry,
     deleteEntry,
 } from "../controllers/diaryController.js"
-import { ensureAuthenticated } from "../middleware/authMiddleware.js";
+import authenticateJWT from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.get("/", ensureAuthenticated, getAllEntries);
-router.get("/:id", ensureAuthenticated, getEntryById);
-router.post("/", ensureAuthenticated, createEntry);
-router.put("/:id", ensureAuthenticated, updateEntry);
-router.delete("/:id", ensureAuthenticated, deleteEntry);
+router.get("/", authenticateJWT, getAllEntries);
+router.get("/:id", authenticateJWT, getEntryById);
+router.post("/", authenticateJWT, createEntry);
+router.put("/:id", authenticateJWT, updateEntry);
+router.delete("/:id", authenticateJWT, deleteEntry);
 
 export default router;

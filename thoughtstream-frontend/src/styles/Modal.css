@@ -1,0 +1,137 @@
+/* Modal overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Modal container */
+  .modal-container {
+    background-color: #f8f3e3;
+    border-radius: 12px;
+    width: 320px;
+    padding: 20px;
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Patrick Hand', cursive;
+    text-align: center;
+    animation: slideUp 0.3s ease-in-out;
+  }
+  
+  /* Title */
+  .modal-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #5a4d41;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Footer with buttons */
+  .modal-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  /* Button styling */
+  .modal-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Cancel button */
+  .cancel-btn {
+    background-color: #d1d1d1;
+    color: #5a4d41;
+  }
+  
+  .cancel-btn:hover {
+    background-color: #b1b1b1;
+  }
+  
+  /* Delete button */
+  .delete-btn {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Fade in effect */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Slide up effect */
+  @keyframes slideUp {
+    from {
+      transform: translateY(50px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  /* Media Queries for responsiveness */
+  
+  /* Small screens (Mobile phones, portrait) */
+  @media (max-width: 480px) {
+    .modal-container {
+      width: 90%;
+      padding: 15px;
+    }
+  
+    .modal-title {
+      font-size: 18px;
+    }
+  
+    .modal-btn {
+      padding: 8px 16px;
+      font-size: 12px;
+    }
+  }
+  
+  /* Medium screens (Tablets, Landscape phones) */
+  @media (max-width: 768px) {
+    .modal-container {
+      width: 75%;
+      padding: 18px;
+    }
+  
+    .modal-title {
+      font-size: 19px;
+    }
+  
+    .modal-btn {
+      padding: 9px 18px;
+      font-size: 13px;
+    }
+  }
+  
+  /* Larger screens (Desktops, Laptops) */
+  @media (min-width: 1024px) {
+    .modal-container {
+      width: 400px;
+    }
+  }
+  

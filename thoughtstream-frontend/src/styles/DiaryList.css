@@ -1,0 +1,49 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.diary-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 60px 0;
+  min-height: 100vh;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.3rem;
+  background-color: #fffef6;
+  position: relative;
+}
+
+/* Each diary entry */
+.diary-entry-wrapper {
+  background: #fffef6;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 95%; /* You can adjust this value */
+  box-sizing: border-box;
+  margin: 0 auto 32px auto; /* Center horizontally and give bottom spacing */
+  padding: 32px;
+  border-radius: 12px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+
+/* Hover soft lift effect */
+.diary-entry-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 768px) {
+  .diary-list-container {
+    padding: 30px 10px;
+  }
+
+  .diary-entry-wrapper {
+    padding: 20px;
+  }
+}

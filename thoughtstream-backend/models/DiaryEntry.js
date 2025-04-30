@@ -14,6 +14,7 @@ const diarySchema = new mongoose.Schema(
       location: { type: String },
       iconCode: { type: String },
     },
+    image: { type: String},
   },
   { timestamps: true }
 );

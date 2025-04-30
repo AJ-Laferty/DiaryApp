@@ -6,14 +6,13 @@ dotenv.config();
 
 export const createEntry = async (req, res) => {
   try {
-    const { title, content, reflection, tags, location} = req.body;
+    const { title, content, reflection, tags, location, image} = req.body;
 
     if (!title || !content || !location) {
       return res.status(400).json({ message: "Title, content, and location are required" });
     }
 
     const weather = await fetchCurrentWeather(location, process.env.WEATHER_KEY);
-    
     const newEntry = new DiaryEntry({
       user: req.user.userId,
       title,
@@ -22,6 +21,7 @@ export const createEntry = async (req, res) => {
       tags,
       location,
       weather,
+      image,
     });
 
     console.log(newEntry);

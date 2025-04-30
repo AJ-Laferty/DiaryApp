@@ -7,12 +7,14 @@ const DiaryEntry = ({ entry, onUpdateEntry, onDeleteEntry }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
     title: entry.title,
     content: entry.content,
     reflection: entry.reflection || "",
-    tags: entry.tags.join(", "),
+    image: entry.image || "",
+    tags: entry.tags.join(","),
   });
 
   const handleChange = (e) => {
@@ -21,6 +23,28 @@ const DiaryEntry = ({ entry, onUpdateEntry, onDeleteEntry }) => {
   };
 
   const handleSave = () => {
+    const newErrors = {};
+    const trimmedTitle = formData.title.trim();
+    const trimmedContent = formData.content.trim();
+    const trimmedImage = formData.image.trim();
+
+    if (!trimmedTitle) newErrors.title = "Title is required.";
+    if (!trimmedContent) newErrors.content = "Content is required.";
+
+    if (
+      trimmedImage &&
+      !/^https?:\/\/.+\.(jpg|jpeg|png|gif|webp)$/i.test(trimmedImage)
+    ) {
+      newErrors.image = "Image URL must end in .jpg, .png, .gif, or .webp.";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // Proceed with update
+    setErrors({});
     const updatedEntry = {
       ...entry,
       ...formData,
@@ -59,6 +83,9 @@ const DiaryEntry = ({ entry, onUpdateEntry, onDeleteEntry }) => {
                 value={formData.title}
                 onChange={handleChange}
               />
+              {errors.title && (
+                <p className="text-red-500 text-xs mt-1">{errors.title}</p>
+              )}
               <textarea
                 name="content"
                 className="w-full mb-3 p-2.5 border border-gray-300 rounded-md font-inherit text-base"
@@ -66,6 +93,9 @@ const DiaryEntry = ({ entry, onUpdateEntry, onDeleteEntry }) => {
                 value={formData.content}
                 onChange={handleChange}
               />
+              {errors.content && (
+                <p className="text-red-500 text-xs mt-1">{errors.content}</p>
+              )}
               <textarea
                 name="reflection"
                 className="w-full mb-3 p-2.5 border border-gray-300 rounded-md font-inherit text-base italic"
@@ -74,6 +104,16 @@ const DiaryEntry = ({ entry, onUpdateEntry, onDeleteEntry }) => {
                 value={formData.reflection}
                 onChange={handleChange}
               />
+              <input
+                name="image"
+                className="w-full mb-3 p-2.5 border border-gray-300 rounded-md font-inherit text-base"
+                placeholder="Image URL (optional)"
+                value={formData.image}
+                onChange={handleChange}
+              />
+              {errors.image && (
+                <p className="text-red-500 text-xs mt-1">{errors.image}</p>
+              )}
               <input
                 name="tags"
                 className="w-full mb-3 p-2.5 border border-gray-300 rounded-md font-inherit text-base"
@@ -111,15 +151,27 @@ const DiaryEntry = ({ entry, onUpdateEntry, onDeleteEntry }) => {
                 {entry.content}
               </p>
 
+              <div className="flex flex-wrap gap-4 my-3 items-start">
+                {entry.image && (
+                  <div className="flex-1 min-w-[200px] max-w-md">
+                    <img
+                      src={entry.image}
+                      alt="Diary Visual"
+                      className="rounded-lg w-full h-auto max-h-[300px] object-cover"
+                    />
+                  </div>
+                )}
+
+                <div className="flex-1 min-w-[200px] max-w-md">
+                  <WeatherWidget weather={entry.weather} />
+                </div>
+              </div>
+
               {entry.reflection && (
                 <blockquote className="border-l-4 border-[#c4a7e7] pl-3 my-3 italic text-[#6a4f8f] col-span-1 break-words">
                   {entry.reflection}
                 </blockquote>
               )}
-
-              <div className="col-start-2 row-span-2">
-                <WeatherWidget weather={entry.weather} />
-              </div>
 
               {entry.tags.length > 0 && (
                 <div className="my-3 col-span-1">

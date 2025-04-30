@@ -5,15 +5,11 @@
  * and defines API routes.
  */
 import express from "express"; // Web framework for Node.js
-import session from "express-session"; //Middleware to manage sessions
-import passport from "passport"; //Authentication framework
 import dotenv from "dotenv"; // Loads environment variables from .env file
 import cors from "cors"; // Enables Cross-Origin Resource Sharing
 import connectDB from "./config/db.js"; // Database connection function
 import diaryRoutes from "./routes/diaryRoutes.js"; // API routes for app
-import cookieParser from "cookie-parser"; //Parses cookies from incoming HTTP requests
-import "./config/passport.js"; //Loads Passport strategy and session serialization logic
-import authRoutes from "./routes/authRoutes.js"
+import authRoutes from "./routes/authRoutes.js";
 
 // Load environment variables from .env into process.env
 dotenv.config();
@@ -26,42 +22,15 @@ connectDB();
  * Executed in the order it is declared
  */
 app.use(express.json()); // Parses JSON request bodies
-app.use(cors()); // Allows cross-origin requests (for frontend interaction)
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true
+})); // Allows cross-origin requests (for frontend interaction)
 // Define API routes
 // All requests to /api/diary are forwarded to diaryRoutes.js
 // Default route to check if the server is running
-//Parses cookies attached to incoming requests.
-//Required by express-session to read the session ID from the cookie.
-app.use(cookieParser());
-/**
-* Configures session management using express-session. This middleware
-* stores session data on the server and issues a session ID cookie
-* to the client (e.g., connect.sid). This cookie (s:<sessionId>.<hmac>)
-* contains a session ID and a HMAC for integrity verification.
-*
-* The HMAC (Hash-based Message Authentication Code) is generated using the
-* SESSION_SECRET and allows the server to verify that the cookie was not
-* altered by the client. If the cookie is tampered with, verification fails
-* and the session is invalidated.
-*
-* Generate a 32-byte secure secret using OpenSSL, an open source
-* cryptographic toolkit and library (https://www.openssl.org/):
-* openssl rand -hex 32
-* Store the 64-char hex string in your .env file as SESSION_SECRET.
-*/
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false
-}));
-// Initializes Passport middleware. This must come after session middleware
-//so Passport can access session data.
-app.use(passport.initialize());
-// Enables persistent login sessions with Passport.It integrates with
-// express-session and makes req.user available for authenticated users.
-app.use(passport.session());
 
-app.use("/auth", authRoutes); // Mount routes under /auth
+app.use("/api/auth", authRoutes); // Mount routes under /api/auth
 
 app.use("/api/diary", diaryRoutes); // Mount routes under /api/diary
 

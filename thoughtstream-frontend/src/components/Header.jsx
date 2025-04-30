@@ -1,28 +1,27 @@
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import "../styles/Header.css";
 
-export default function Header() {
-  const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
+const Header = ({ user, onLogout }) => {
+  const firstName = user?.name?.split(' ')[0] || 'User';
 
   return (
-    <header className="flex justify-between items-center mb-6">
-      <h1 className="text-2xl font-bold">ThoughtStream</h1>
-      <div className="flex items-center gap-4">
-        <span className="text-gray-700">Hi, {user?.name || "User"}</span>
-        <button
-          onClick={handleLogout}
-          className="px-4 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-        >
-          Logout
-        </button>
+    <header className="header">
+      <div className="logo">
+        <h1>ThoughtStream</h1>
+      </div>
+      <div className="user-info">
+        <span>{firstName}</span>
+        {user?.picture && (
+          <img
+            src={user.picture}
+            alt="Profile"
+            className="user-image"
+          />
+        )}
+        <button onClick={onLogout} className="logout-button">Logout</button>
       </div>
     </header>
   );
-}
+};
+
+export default Header;

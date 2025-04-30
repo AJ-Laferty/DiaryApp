@@ -1,9 +1,36 @@
-export default function WeatherWidget() {
-    return (
-      <div className="bg-white rounded shadow p-4">
-        <h2 className="font-semibold text-lg mb-2">Weather</h2>
-        <p className="text-gray-600">Weather data</p>
+import React from 'react';
+import '../styles/WeatherWidget.css';
+
+const WeatherWidget = ({ weather }) => {
+  const { condition, temperature, location } = weather;
+
+  const getWeatherClass = (condition) => {
+    switch (condition.toLowerCase()) {
+      case 'sunny':
+        return 'sunny';
+      case 'cloudy':
+        return 'cloudy';
+      case 'rainy':
+        return 'rainy';
+      case 'snowy':
+        return 'snowy';
+      default:
+        return 'cloudy';
+    }
+  };
+
+  return (
+    <div className="weather-widget">
+      <h3 className="weather-location">{location}</h3>
+      <div className="weather-main">
+        <div className={`weather-icon ${getWeatherClass(condition)}`} />
+        <div className="weather-info">
+          <p className="temperature">{temperature}°C</p>
+          <p className="condition">{condition}</p>
+        </div>
       </div>
-    );
-  }
-  
+    </div>
+  );
+};
+
+export default WeatherWidget;

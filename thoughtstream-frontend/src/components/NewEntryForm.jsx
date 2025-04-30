@@ -1,26 +1,71 @@
-export default function NewEntryForm() {
-    return (
-      <form className="bg-white rounded shadow p-4 space-y-4">
-        <h2 className="font-semibold text-lg">New Entry</h2>
-        <input
-          type="text"
-          placeholder="Title"
-          className="w-full border px-3 py-2 rounded"
-          disabled
-        />
-        <textarea
-          placeholder="What's on your mind?"
-          className="w-full border px-3 py-2 rounded"
-          disabled
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white rounded py-2"
-          disabled
-        >
-          Save Entry
-        </button>
-      </form>
-    );
-  }
-  
+import React, { useState } from 'react';
+import "../styles/NewEntryForm.css";
+
+const NewEntryForm = ({ onSave }) => {
+  const [newEntry, setNewEntry] = useState({
+    name: '',
+    date: '',
+    content: '',
+    weatherLocation: '',
+    image: null,
+  });
+
+  // Handle changes in input fields
+  const handleInputChange = (e) => {
+    setNewEntry({ ...newEntry, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave(newEntry); // Pass the new entry to parent for saving
+    setNewEntry({
+      name: '',
+      date: '',
+      content: '',
+      weatherLocation: '',
+    }); // Reset form
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="new-entry-form">
+      <input
+        type="text"
+        name="name"
+        placeholder="Title"
+        value={newEntry.name}
+        onChange={handleInputChange}
+        required
+        className="form-input"
+      />
+      <input
+        type="date"
+        name="date"
+        value={newEntry.date}
+        onChange={handleInputChange}
+        required
+        className="form-input"
+      />
+      <textarea
+        name="content"
+        placeholder="Diary entry content"
+        value={newEntry.content}
+        onChange={handleInputChange}
+        required
+        className="form-textarea"
+      />
+      <input
+        type="text"
+        name="weatherLocation"
+        placeholder="Location for weather"
+        value={newEntry.weatherLocation}
+        onChange={handleInputChange}
+        required
+        className="form-input"
+      />
+      <button type="submit" className="submit-button">Save Entry</button>
+    </form>
+  );
+};
+
+export default NewEntryForm;

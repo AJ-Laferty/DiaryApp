@@ -1,0 +1,203 @@
+/* Base container */
+.diary-entry {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Five-column grid */
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr; /* Five-row grid */
+  gap: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background-color: #fffef9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  margin-bottom: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.diary-entry:hover {
+  transform: scale(1.01);
+}
+
+/* Title and date at the top */
+.diary-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.diary-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.diary-date {
+  font-size: 0.9rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* Content and reflection */
+.diary-content {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 12px;
+  grid-column: 1 / 2; /* Content goes into the first column */
+}
+
+.diary-reflection-blockquote {
+  border-left: 4px solid #c4a7e7;
+  padding-left: 12px;
+  margin: 12px 0;
+  font-style: italic;
+  color: #6a4f8f;
+  grid-column: 1 / 2;
+}
+
+/* Tags */
+.diary-tags {
+  margin: 12px 0;
+  grid-column: 1 / 2;
+}
+
+.diary-tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  color: #444;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+/* Last updated */
+.diary-last-updated {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-top: 8px;
+  grid-column: 2;
+  grid-row: 2;
+  text-align: right;
+}
+
+/* Inputs and textarea for editing */
+.diary-input-title,
+.diary-input-tags,
+.diary-textarea {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.diary-input-title {
+  font-weight: bold;
+}
+
+/* Actions (buttons) */
+.diary-actions {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.diary-actions button {
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Button colors */
+.diary-update-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.diary-delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.diary-save-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.diary-cancel-btn {
+  background-color: #9e9e9e;
+  color: white;
+}
+
+/* Weather widget */
+.weather-widget-container {
+  grid-column: 2;
+  grid-row: span 2;
+}
+
+/* Modal text */
+.modal-text {
+  font-size: 1rem;
+  padding: 10px 0;
+  color: #333;
+}
+
+/* --------------------- */
+/* 🔁 Responsive Styles  */
+/* --------------------- */
+
+/* Small tablets and phones */
+@media (max-width: 768px) {
+  .diary-entry {
+    grid-template-columns: 1fr; /* One column on small screens */
+  }
+
+  .diary-title {
+    font-size: 1.25rem;
+  }
+
+  .diary-content,
+  .diary-reflection-blockquote,
+  .diary-textarea {
+    font-size: 0.95rem;
+  }
+
+  .diary-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .diary-actions button {
+    width: 100%;
+  }
+
+  .diary-tag {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .diary-last-updated {
+    font-size: 0.7rem;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 480px) {
+  .diary-title {
+    font-size: 1.1rem;
+  }
+
+  .diary-input-title,
+  .diary-textarea,
+  .diary-input-tags {
+    font-size: 0.9rem;
+  }
+}

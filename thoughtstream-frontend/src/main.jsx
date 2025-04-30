@@ -13,6 +13,7 @@ import App from "./App";
 import AuthProvider from "./context/AuthContext";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import React from "react";
+import "./index.css"; // Global CSS styles
 // Select the root DOM node from index.html (must match <div id="root">)
 const rootElement = document.getElementById("root");
 // Create a root rendering context (React 18+ API)

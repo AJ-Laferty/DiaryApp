@@ -2,11 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import api from "../services/api";
-
+import Header from "../components/Header";
 import DiaryList from "../components/DiaryList";
 import NewEntryForm from "../components/NewEntryForm";
-import Header from "../components/Header";
-
 import "../styles/Dashboard.css";
 
 const DashboardPage = () => {
@@ -67,10 +65,7 @@ const DashboardPage = () => {
     }
     console.log(id);
     try {
-      const response = await api.put(
-        `api/diary/${id}`,
-        updatedEntry
-      );
+      const response = await api.put(`api/diary/${id}`, updatedEntry);
       setEntries((prev) =>
         prev
           .map((entry) =>
@@ -102,12 +97,19 @@ const DashboardPage = () => {
     <>
       <Header user={user} onLogout={logout} />
 
-      <div className="dashboard-container">
-        <NewEntryForm onSave={handleAddEntry} />
+      <div className="max-w-7xl mx-auto p-4 md:p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="bg-[#f7f7f7] shadow-md rounded-lg p-6 md:p-8">
+          <h2 className="text-3xl font-bold text-[#333] font-[Patrick_Hand] mb-6">
+            New Diary Entry
+          </h2>
+          <NewEntryForm onSave={handleAddEntry} />
+        </div>
 
-        <div className="entries-section">
-          <h2 className="entries-title">Your Diary Entries</h2>
-          <div className="entries-container">
+        <div className="bg-[#f7f7f7] shadow-md rounded-lg p-6 md:p-8">
+          <h2 className="text-3xl font-bold text-[#333] font-[Patrick_Hand] mb-6">
+            Your Diary Entries
+          </h2>
+          <div className="flex flex-col gap-4">
             <DiaryList
               entries={entries}
               onUpdateEntry={handleUpdateEntry}

@@ -6,9 +6,9 @@ const DiaryList = ({ entries, onUpdateEntry, onDeleteEntry }) => {
   return (
     <div className="diary-list-container">
       <div className="notebook-binding" />
-      {entries.map((entry) => (
+      {entries.map((entry, index) => (
         <div
-          key={entry.id || `${entry.name}-${entry.date}`}
+          key={entry.id || `${entry.name}-${entry.date}-${index}`}
           className="diary-entry-wrapper"
         >
           <DiaryEntryCard

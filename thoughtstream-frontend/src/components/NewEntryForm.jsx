@@ -29,7 +29,7 @@ const NewEntryForm = ({ onSave }) => {
 
     const tagArray = raw
       .split(',')
-      .map(tag)
+      .map(tag => tag.trim())
       .filter(tag => tag.length > 0);
 
     setNewEntry({ ...newEntry, tags: tagArray });
